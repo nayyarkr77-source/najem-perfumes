@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Najem Perfumes | High-End Fragrances Oman</title>
+    <!-- Font Awesome Icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold-primary: #D4AF37;
+            --gold-light: #F3E5AB;
+            --gold-dark: #AA7C11;
+            --bg-dark: #0F0F0F;
+            --bg-card: #1A1A1A;
+            --bg-lighter: #262626;
+            --text-light: #F5F5F5;
+            --text-muted: #A0A0A0;
+            --accent-red: #8B0000;
+        }
+
+        [dir="rtl"] {
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Ambient Audio Control */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+            padding: 10px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        /* Top Bar & Header */
+        .top-bar {
+            background: #000;
+            color: var(--gold-light);
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            border-bottom: 1px solid #222;
+        }
+
+        .top-bar-links a {
+            color: var(--gold-light);
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        header {
+            background: rgba(15, 15, 15, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold-primary);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--gold-primary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--gold-primary);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: bold;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero Showcase Section */
+        .hero {
+            position: relative;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&q=80&w=1600') center/cover;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            color: var(--gold-primary);
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 25px;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: #000;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Filter & Search Bar Section */
+        .filter-section {
+            padding: 30px 5%;
+            background: var(--bg-card);
+            border-bottom: 1px solid #333;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 25px auto;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 20px;
+            background: var(--bg-dark);
+            border: 1px solid var(--gold-primary);
+            border-radius: 30px;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--gold-primary);
+            font-size: 1.2rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .filter-btn {
+            background: var(--bg-dark);
+            border: 1px solid #444;
+            color: var(--text-light);
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            border-color: var(--gold-primary);
+            color: var(--gold-primary);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        /* Product Grid */
+        .products-section {
+            padding: 50px 5%;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            font-size: 2rem;
+            color: var(--gold-primary);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: var(--gold-primary);
+            margin: 10px auto 0 auto;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid #2A2A2A;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-primary);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .product-img {
+            height: 230px;
+            width: 100%;
+            object-fit: cover;
+            background: #111;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-brand {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            letter-spacing: 1px;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 5px 0 10px 0;
+            color: #fff;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            margin-bottom: 15px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-card {
+            flex: 1;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid var(--gold-primary);
+            background: none;
+            color: var(--gold-primary);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        .btn-card:hover {
+            background: var(--gold-primary);
+            color: #000;
+        }
+
+        /* Classic Collection Special Banner Section */
+        .classic-banner {
+            margin: 50px 5%;
+            background: linear-gradient(135deg, #1A1A1A, #000);
+            border: 2px solid var(--gold-primary);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .classic-banner h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-primary);
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .classic-slogan {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #ddd;
+            margin-bottom: 20px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Modals (Product Details, Cart, Admin) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--gold-primary);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 650px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Form Inputs */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--gold-primary);
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background: var(--bg-dark);
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 6px;
+        }
+
+        /* Responsive UI */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+            .product-img { height: 160px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Music Player -->
+    <button class="music-control" id="musicToggle" onclick="toggleAudio()">
+        <i class="fas fa-music"></i> <span id="musicText">Play Music</span>
+    </button>
+    <audio id="bgAudio" loop preload="none">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Top Info Bar with Exact Google Maps Link -->
+    <div class="top-bar">
+        <div><i class="fas fa-truck"></i> Delivery across Oman: 2 OMR (Home - 2 Days) | 1 OMR (Office Pick)</div>
+        <div class="top-bar-links">
+            <a href="https://maps.app.goo.gl/5XSh6z5AU3w8eubi8?g_st=ac" target="_blank"><i class="fas fa-map-marker-alt"></i> Store Location</a>
+            <a href="#" onclick="switchLanguage('en')">EN</a> | <a href="#" onclick="switchLanguage('ar')">عربي</a>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">NAJEM PERFUMES</a>
+            <ul class="nav-menu">
+                <li><a href="#" class="active" onclick="filterBySection('all')">Home</a></li>
+                <li><a href="#" onclick="filterBySection('Men')">Men</a></li>
+                <li><a href="#" onclick="filterBySection('Women')">Women</a></li>
+                <li><a href="#" onclick="filterBySection('Unisex')">Unisex</a></li>
+                <li><a href="#" onclick="showClassicCollection()">Classic Collection</a></li>
+                <li><a href="#" onclick="openAdminLogin()"><i class="fas fa-lock"></i> Admin</a></li>
+            </ul>
+            <div class="header-actions">
+                <button class="action-btn" onclick="openCartModal()">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Showcase Section -->
+    <section class="hero" id="heroSection">
+        <div class="hero-content">
+            <h1 id="heroTitle">NAJEM PERFUMES</h1>
+            <p id="heroSub">Discover Luxury Scents & Signature Impression Perfumes in Oman</p>
+            <a href="#catalog" class="btn-gold">Explore Fragrances</a>
+        </div>
+    </section>
+
+    <!-- Filter & Search Controls -->
+    <section class="filter-section" id="catalog">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search by Perfume Name or Brand (e.g., Dior, Chanel)..." onkeyup="filterProducts()">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="filter-tabs" id="brandTabs">
+            <button class="filter-btn active" onclick="filterByBrand('all')">All Brands</button>
+            <!-- Dynamic Brand Buttons rendered via JS -->
+        </div>
+    </section>
+
+    <!-- Products Display Grid -->
+    <section class="products-section">
+        <h2 class="section-title" id="sectionTitle">Featured Perfumes</h2>
+        <div class="product-grid" id="productGrid">
+            <!-- Products Loaded Dynamically -->
+        </div>
+    </section>
+
+    <!-- Classic Collection Banner -->
+    <section class="classic-banner">
+        <h2>CLASSIC COLLECTION</h2>
+        <p class="classic-slogan">"Experience the irresistible allure of world-class iconic scents crafted into high-concentration impressions. Unmatched luxury scent profiles at accessible prices."</p>
+        <p style="margin-bottom:20px; font-size:0.9rem; color:var(--gold-primary);">Official Partner Web: www.ccperfumes.com</p>
+        <a href="https://www.ccperfumes.com" target="_blank" class="btn-gold">Visit ccperfumes.com</a>
+    </section>
+
+    <!-- Product Details Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('productModal')">&times;</span>
+            <div id="modalProductDetails"></div>
+        </div>
+    </div>
+
+    <!-- Cart & Checkout Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('cartModal')">&times;</span>
+            <h2 style="color:var(--gold-primary); margin-bottom:20px;">Your Shopping Cart</h2>
+            <div id="cartItemsList"></div>
+            
+            <div style="margin-top:20px; border-top:1px solid #333; padding-top:15px;">
+                <div class="form-group">
+                    <label>Select Delivery Method (Oman):</label>
+                    <select id="deliveryOption" onchange="updateCartTotal()">
+                        <option value="2">Home Delivery (2 OMR - Within 2 Days)</option>
+                        <option value="1">Office Collection Point Pick-up (1 OMR)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Payment Method:</label>
+                    <select id="paymentMethod">
+                        <option value="Cash on Delivery (COD)">Cash on Delivery (COD)</option>
+                        <option value="Visa / Card Payment">Visa / MasterCard</option>
+                        <option value="Mobile Payment (Oman Phone Pe/Pay)">Mobile Payment</option>
+                    </select>
+                </div>
+
+                <div style="font-size:1.2rem; font-weight:bold; color:var(--gold-light); margin:15px 0;" id="cartTotalText">
+                    Total: 0.00 OMR
+                </div>
+
+                <button class="btn-gold" style="width:100%; padding:14px;" onclick="sendWhatsAppOrder()">
+                    <i class="fab fa-whatsapp"></i> Checkout via WhatsApp (+968-97796019)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div class="modal" id="adminModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('adminModal')">&times;</span>
+            <div id="adminAuthSection">
+                <h2 style="color:var(--gold-primary);">Store Owner Login</h2>
+                <div class="form-group" style="margin-top:15px;">
+                    <label>Enter Admin Passcode:</label>
+                    <input type="password" id="adminPinInput" placeholder="Default PIN: 1234">
+                </div>
+                <button class="btn-gold" onclick="verifyAdminPin()">Unlock Panel</button>
+            </div>
+
+            <div id="adminDashboard" style="display:none;">
+                <h2 style="color:var(--gold-primary); margin-bottom:15px;">Najem Store Manager</h2>
+                
+                <h3 style="color:#fff; font-size:1rem; margin-top:20px;">Add New Fragrance Item</h3>
+                <div class="form-group">
+                    <label>Perfume Name:</label>
+                    <input type="text" id="addName" placeholder="e.g. Sauvage Elixir">
+                </div>
+                <div style="margin-bottom:10px;">
+                    <button type="button" class="btn-card" style="font-size:0.8rem;" onclick="searchFragrantica()">
+                        <i class="fas fa-external-link-alt"></i> Search Notes on Fragrantica.com
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label>Brand Name:</label>
+                    <input type="text" id="addBrand" placeholder="e.g. Dior, Chanel, Rasasi...">
+                </div>
+                <div class="form-group">
+                    <label>Section & Category:</label>
+                    <select id="addSection">
+                        <option value="Men">Men</option>
+                        <option value="Women">Women</option>
+                        <option value="Unisex">Unisex</option>
+                        <option value="Classic Collection">Classic Collection (Impressions)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Price in OMR:</label>
+                    <input type="number" step="0.1" id="addPrice" placeholder="e.g. 25.0">
+                </div>
+                <div class="form-group">
+                    <label>Image URL:</label>
+                    <input type="text" id="addImage" placeholder="Image web URL...">
+                </div>
+                <div class="form-group">
+                    <label>Fragrance Notes / Description:</label>
+                    <textarea id="addNotes" rows="2" placeholder="Top: Bergamot, Heart: Lavender, Base: Ambroxan..."></textarea>
+                </div>
+                <button class="btn-gold" style="width:100%;" onclick="addNewProduct()">Save Perfume to Store</button>
+
+                <h3 style="color:#fff; font-size:1rem; margin-top:30px;">Manage Existing Items</h3>
+                <div id="adminProductList" style="margin-top:10px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Initial Sample Inventory
+        let initialProducts = [
+            { id: 1, name: "Bleu De Chanel EDP", brand: "Chanel", section: "Men", category: "Perfumes", price: 45.0, image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&q=80&w=500", notes: "Citrus, Grapefruit, Mint, Pink Pepper, Iso E Super, Cedar." },
+            { id: 2, name: "Sauvage Eau de Parfum", brand: "Dior", section: "Men", category: "Perfumes", price: 42.0, image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=500", notes: "Calabrian bergamot, Sichuan Pepper, Lavender, Star Anise, Nutmeg." },
+            { id: 3, name: "Hawas for Him", brand: "Rasasi", section: "Men", category: "Perfumes", price: 18.0, image: "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&q=80&w=500", notes: "Apple, Bergamot, Cinnamon, Orange Blossom, Grey Amber, Driftwood." },
+            { id: 4, name: "Black Opium", brand: "YSL", section: "Women", category: "Perfumes", price: 38.0, image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=500", notes: "Pear, Pink Pepper, Orange Blossom, Coffee, Jasmine, Vanilla." },
+            { id: 5, name: "Classic Baccarat Impression", brand: "Classic Collection", section: "Classic Collection", category: "Testers", price: 8.5, image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=500", notes: "High Concentration Impression - Jasmine, Saffron, Cedarwood, Ambergris." }
+        ];
+
+        // Persistent State
+        let products = JSON.parse(localStorage.getItem('najem_products')) || initialProducts;
+        let cart = JSON.parse(localStorage.getItem('najem_cart')) || [];
+        let currentSection = 'all';
+        let currentBrand = 'all';
+
+        // Initialize Store App
+        document.addEventListener("DOMContentLoaded", () => {
+            renderBrandTabs();
+            renderProducts();
+            updateCartBadge();
+        });
+
+        // Ambient Audio Toggle
+        function toggleAudio() {
+            let audio = document.getElementById('bgAudio');
+            let text = document.getElementById('musicText');
+            if (audio.paused) {
+                audio.play();
+                text.innerText = "Pause Music";
+            } else {
+                audio.pause();
+                text.innerText = "Play Music";
+            }
+        }
+
+        // Render Unique Brand Filters
+        function renderBrandTabs() {
+            let brands = ['all', ...new Set(products.map(p => p.brand))];
+            let container = document.getElementById('brandTabs');
+            container.innerHTML = brands.map(b => `
+                <button class="filter-btn ${currentBrand === b ? 'active' : ''}" onclick="filterByBrand('${b}')">
+                    ${b === 'all' ? 'All Brands' : b}
+                </button>
+            `).join('');
+        }
+
+        // Render Filtered Products
+        function renderProducts() {
+            let grid = document.getElementById('productGrid');
+            let searchVal = document.getElementById('searchInput').value.toLowerCase();
+
+            let filtered = products.filter(p => {
+                let matchSection = currentSection === 'all' || p.section === currentSection;
+                let matchBrand = currentBrand === 'all' || p.brand === currentBrand;
+                let matchSearch = p.name.toLowerCase().includes(searchVal) || p.brand.toLowerCase().includes(searchVal);
+                return matchSection && matchBrand && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:var(--text-muted); padding:40px;">No perfumes found.</div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(p => `
+                <div class="product-card">
+                    <img src="${p.image}" class="product-img" alt="${p.name}">
+                    <div class="product-info">
+                        <div class="product-brand">${p.brand}</div>
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-meta">
+                            <span>${p.section}</span>
+                            <span>${p.category || 'Perfume'}</span>
+                        </div>
+                        <div class="product-price">${p.price.toFixed(3)} OMR</div>
+                        <div class="card-actions">
+                            <button class="btn-card" onclick="viewDetails(${p.id})">Details</button>
+                            <button class="btn-card" style="background:var(--gold-primary); color:#000;" onclick="addToCart(${p.id})">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Search & Filter Trigger
+        function filterProducts() { renderProducts(); }
+        
+        function filterBySection(section) {
+            currentSection = section;
+            document.getElementById('sectionTitle').innerText = section === 'all' ? 'Featured Perfumes' : section + ' Collection';
+            renderProducts();
+        }
+
+        function filterByBrand(brand) {
+            currentBrand = brand;
+            renderBrandTabs();
+            renderProducts();
+        }
+
+        function showClassicCollection() {
+            currentSection = 'Classic Collection';
+            document.getElementById('sectionTitle').innerText = 'Classic Collection (High Quality Impressions)';
+            renderProducts();
+        }
+
+        // View Details Modal
+        function viewDetails(id) {
+            let p = products.find(prod => prod.id === id);
+            let container = document.getElementById('modalProductDetails');
+            let fragranticaSearchUrl = `https://www.fragrantica.com/search/?query=${encodeURIComponent(p.brand + ' ' + p.name)}`;
+
+            container.innerHTML = `
+                <div style="text-align:center;">
+                    <img src="${p.image}" style="max-height:220px; border-radius:8px; margin-bottom:15px;">
+                    <h2 style="color:var(--gold-primary);">${p.name}</h2>
+                    <p style="color:var(--text-muted); font-size:0.9rem;">Brand: ${p.brand} | ${p.section}</p>
+                    <h3 style="color:var(--gold-light); margin:15px 0;">Price: ${p.price.toFixed(3)} OMR</h3>
+                    <div style="background:var(--bg-dark); padding:15px; border-radius:8px; text-align:left; margin-bottom:20px;">
+                        <strong style="color:var(--gold-primary);">Fragrance Notes & Profile:</strong>
+                        <p style="margin-top:5px; font-size:0.9rem;">${p.notes || 'Premium scent notes formulation.'}</p>
+                    </div>
+                    <div style="display:flex; gap:10px; justify-content:center;">
+                        <a href="${fragranticaSearchUrl}" target="_blank" class="btn-card" style="text-decoration:none; display:inline-block;">
+                            <i class="fas fa-external-link-alt"></i> Verify Notes on Fragrantica
+                        </a>
+                        <button class="btn-gold" onclick="addToCart(${p.id}); closeModal('productModal');">Add to Cart</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('productModal').style.display = 'flex';
+        }
+
+        // Cart Management
+        function addToCart(id) {
+            let item = cart.find(c => c.id === id);
+            if (item) {
+                item.qty += 1;
+            } else {
+                let p = products.find(prod => prod.id === id);
+                cart.push({ ...p, qty: 1 });
+            }
+            saveCart();
+            alert("Added to cart!");
+        }
+
+        function saveCart() {
+            localStorage.setItem('najem_cart', JSON.stringify(cart));
+            updateCartBadge();
+        }
+
+        function updateCartBadge() {
+            let count = cart.reduce((acc, i) => acc + i.qty, 0);
+            document.getElementById('cartCount').innerText = count;
+        }
+
+        function openCartModal() {
+            renderCartList();
+            document.getElementById('cartModal').style.display = 'flex';
+        }
+
+        function renderCartList() {
+            let container = document.getElementById('cartItemsList');
+            if (cart.length === 0) {
+                container.innerHTML = `<p style="color:var(--text-muted);">Your cart is empty.</p>`;
+                updateCartTotal();
+                return;
+            }
+
+            container.innerHTML = cart.map(item => `
+                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #333; padding:10px 0;">
+                    <div>
+                        <div style="font-weight:bold; color:#fff;">${item.name}</div>
+                        <div style="font-size:0.8rem; color:var(--gold-primary);">${item.price.toFixed(3)} OMR x ${item.qty}</div>
+                    </div>
+                    <div>
+                        <button onclick="changeQty(${item.id}, -1)" style="padding:2px 8px;">-</button>
+                        <span style="margin:0 8px;">${item.qty}</span>
+                        <button onclick="changeQty(${item.id}, 1)" style="padding:2px 8px;">+</button>
+                    </div>
+                </div>
+            `).join('');
+            updateCartTotal();
+        }
+
+        function changeQty(id, delta) {
+            let item = cart.find(c => c.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(c => c.id !== id);
+                }
+            }
+            saveCart();
+            renderCartList();
+        }
+
+        function updateCartTotal() {
+            let subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+            let delivery = parseFloat(document.getElementById('deliveryOption').value) || 0;
+            let total = subtotal + (cart.length > 0 ? delivery : 0);
+            document.getElementById('cartTotalText').innerText = `Total: ${total.toFixed(3)} OMR (Incl. ${delivery.toFixed(1)} OMR Delivery)`;
+        }
+
+        // WhatsApp Checkout
+        function sendWhatsAppOrder() {
+            if (cart.length === 0) {
+                alert("Cart is empty!");
+                return;
+            }
+
+            let deliveryCost = parseFloat(document.getElementById('deliveryOption').value);
+            let deliveryText = deliveryCost === 2 ? "Home Delivery (2 OMR - 2 Days)" : "Office Pickup (1 OMR)";
+            let payment = document.getElementById('paymentMethod').value;
+            
+            let subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+            let total = subtotal + deliveryCost;
+
+            let text = `*NEW ORDER - NAJEM PERFUMES*\n\n`;
+            cart.forEach(i => {
+                text += `• ${i.name} (${i.brand}) - ${i.qty} x ${i.price.toFixed(3)} OMR\n`;
+            });
+            text += `\n*Delivery Option:* ${deliveryText}`;
+            text += `\n*Payment Method:* ${payment}`;
+            text += `\n*Total Order Amount:* ${total.toFixed(3)} OMR\n\nPlease confirm my order.`;
+
+            let phone = "96897796019";
+            let url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        }
+
+        // Modal Helpers
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        // Admin Security & Management Panel
+        function openAdminLogin() { document.getElementById('adminModal').style.display = 'flex'; }
+
+        function verifyAdminPin() {
+            let pin = document.getElementById('adminPinInput').value;
+            if (pin === "1234") { // Default PIN: 1234
+                document.getElementById('adminAuthSection').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+                renderAdminProductList();
+            } else {
+                alert("Incorrect PIN code!");
+            }
+        }
+
+        function searchFragrantica() {
+            let name = document.getElementById('addName').value;
+            let brand = document.getElementById('addBrand').value;
+            if (!name) { alert("Please enter a perfume name first!"); return; }
+            let query = encodeURIComponent(brand + " " + name);
+            window.open(`https://www.fragrantica.com/search/?query=${query}`, '_blank');
+        }
+
+        function addNewProduct() {
+            let name = document.getElementById('addName').value;
+            let brand = document.getElementById('addBrand').value;
+            let section = document.getElementById('addSection').value;
+            let price = parseFloat(document.getElementById('addPrice').value);
+            let image = document.getElementById('addImage').value || 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=500';
+            let notes = document.getElementById('addNotes').value;
+
+            if (!name || !price) { alert("Name and Price are required!"); return; }
+
+            let newProd = {
+                id: Date.now(),
+                name, brand: brand || 'Najem', section, category: 'Perfumes', price, image, notes
+            };
+
+            products.push(newProd);
+            saveProducts();
+            alert("Perfume added successfully!");
+            renderAdminProductList();
+            renderProducts();
+            renderBrandTabs();
+        }
+
+        function deleteProduct(id) {
+            if (confirm("Delete this perfume from store?")) {
+                products = products.filter(p => p.id !== id);
+                saveProducts();
+                renderAdminProductList();
+                renderProducts();
+                renderBrandTabs();
+            }
+        }
+
+        function saveProducts() {
+            localStorage.setItem('najem_products', JSON.stringify(products));
+        }
+
+        function renderAdminProductList() {
+            let list = document.getElementById('adminProductList');
+            list.innerHTML = products.map(p => `
+                <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-dark); padding:10px; margin-bottom:8px; border-radius:6px;">
+                    <div>
+                        <strong>${p.name}</strong> (${p.brand}) - <span style="color:var(--gold-primary);">${p.price.toFixed(3)} OMR</span>
+                    </div>
+                    <button style="background:red; color:#fff; border:none; padding:5px 10px; border-radius:4px; cursor:pointer;" onclick="deleteProduct(${p.id})">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        // Language Switcher Logic
+        function switchLanguage(lang) {
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+                document.getElementById('heroTitle').innerText = 'عطور النجم';
+                document.getElementById('heroSub').innerText = 'اكتشف العطور الفاخرة وتشكيلة كلاسيك كولكشن في عمان';
+                document.getElementById('sectionTitle').innerText = 'العطور المميزة';
+            } else {
+                document.documentElement.dir = 'ltr';
+                document.getElementById('heroTitle').innerText = 'NAJEM PERFUMES';
+                document.getElementById('heroSub').innerText = 'Discover Luxury Scents & Signature Impression Perfumes in Oman';
+                document.getElementById('sectionTitle').innerText = 'Featured Perfumes';
+            }
+        }
+    </script>
+</body>
+</html>
